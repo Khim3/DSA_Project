@@ -29,7 +29,7 @@ def plotData(data):
     offset = (canvas_width - (x_width * len(data) + total_spacing)) / 2
 
     # Adjusted height calculation to fit within canvas
-    max_data_height = canvas_height - 20  # Adjusted to fit within canvas vertically
+    max_data_height = canvas_height - 40  # Adjusted to fit within canvas vertically
 
     normalized_data = [i / max(data) for i in data]
 
@@ -41,9 +41,6 @@ def plotData(data):
         canvas.create_rectangle(x0, y0, x1, y1, fill='blue')
         canvas.create_text(x0 + 2, y0, anchor=SW, text=str(data[i]), font=('Arial', 15, 'italic'),
                            fill='red')
-
-
-
 
 # Create algorithm combobox
 selected_algorithm = StringVar()
