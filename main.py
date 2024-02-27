@@ -7,19 +7,21 @@ root.title('Sorting Visualizer')
 root.geometry('1440x700')
 root.config(bg='gray')
 
-## Function
+# Function
+
+
 def Generator():
-    # print('Selected Algorithm:', selected_algorithm.get())
     data = [random.randint(minScale.get(), maxScale.get())
             for _ in range(int(dataMenu.get()))]
-    # data = []
+
     plotData(data)
 
 
 def plotData(data):
+    canvas.delete('all')
     canvas_height = 500
     canvas_width = 950
-    
+
     # Calculate width of each rectangle and spacing
     spacing_bet_rect = 10
     total_spacing = (len(data) + 1) * spacing_bet_rect
@@ -42,6 +44,7 @@ def plotData(data):
         canvas.create_text(x0 + 2, y0, anchor=SW, text=str(data[i]), font=('Arial', 15, 'italic'),
                            fill='red')
 
+
 # Create algorithm combobox
 selected_algorithm = StringVar()
 algoLabel = Label(root, text='Algorithm: ', font=(
@@ -59,7 +62,7 @@ random_generate = Button(root, text='Generate data', font=('Arial', 15, 'bold'),
                          relief=SUNKEN, activebackground='green', activeforeground='white', bd=5, width=13, command=Generator)
 random_generate.place(x=1100, y=50)
 # create a combobox for choose number of data
-dataLabel = Label(root, text='No. of data: ', font=(
+dataLabel = Label(root, text='Size : ', font=(
     'Arial', 15, 'italic'), bg='green', width=15, fg='black', relief=GROOVE, bd=5)
 dataLabel.place(x=0, y=50)
 
@@ -73,14 +76,14 @@ dataMenu.place(x=2, y=85)
 minValueLabel = Label(root, text='Min Value', font=(
     'Arial', 15, 'italic'), bg='green', width=10, fg='black', relief=GROOVE, bd=5)
 minValueLabel.place(x=250, y=50)
-minScale = Scale(root, from_=1, to=10, orient=HORIZONTAL, length=200,
+minScale = Scale(root, from_=1, to=9, orient=HORIZONTAL, length=200,
                  label='Min Value', font=('Arial', 15, 'bold'), bg='green', fg='black')
 minScale.place(x=380, y=50)
 
 # max value
-maxValue = Label(root, text='Max Value', font=(
+maxValueLabel = Label(root, text='Max Value', font=(
     'Arial', 15, 'italic'), bg='green', width=10, fg='black', relief=GROOVE, bd=5)
-maxValue.place(x=600, y=50)
+maxValueLabel.place(x=600, y=50)
 maxScale = Scale(root, from_=10, to=100, resolution=5, orient=HORIZONTAL, length=200,
                  label='Max Value', font=('Arial', 15, 'bold'), bg='green', fg='black')
 maxScale.place(x=730, y=50)
@@ -99,7 +102,6 @@ speedMenu.current(1)
 speedMenu.place(x=735, y=0)
 
 # canvas for visualizing
-
 canvas = Canvas(root, width=950, height=500, bg='black')
 canvas.place(x=15, y=150)
 
