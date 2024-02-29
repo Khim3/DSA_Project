@@ -47,8 +47,6 @@ def plotData(data, colorArr):
                            fill='red')
     root.update_idletasks()
 # sort algorithm
-
-
 def StartAlgorithm():
     global data
     bubble_sort(data, plotData, float(speedMenu.get()))
