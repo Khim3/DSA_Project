@@ -35,23 +35,19 @@ def plotData(data, colorArr):
     # Adjusted height calculation to fit within canvas
     max_data_height = canvas_height - 40  # Adjusted to fit within canvas vertically
 
-    normalized_data = [i / max(data) for i in data]
-
     for i, height in enumerate(data):
         x0 = i * x_width + (i + 1) * spacing_bet_rect + offset
         y0 = canvas_height - (height / max(data)) * max_data_height
         x1 = x0 + x_width
         y1 = canvas_height
         canvas.create_rectangle(x0, y0, x1, y1, fill=colorArr[i])
-        canvas.create_text(x0 + 2, y0, anchor=SW, text=str(data[i]), font=('Arial', 18, 'bold'),
+        canvas.create_text(x0 + 2, y0, anchor=SW, text=str(data[i]), font=('Arial', 15,'bold'),
                            fill='red')
     root.update_idletasks()
 # sort algorithm
 def StartAlgorithm():
     global data
     bubble_sort(data, plotData, float(speedMenu.get()))
-
-
 # Create algorithm combobox
 selected_algorithm = StringVar()
 algoLabel = Label(root, text='Algorithm: ', font=(
@@ -60,7 +56,6 @@ algoLabel.place(x=0, y=0)
 
 algoMenu = ttk.Combobox(root, height=10, width=20, font=('Arial', 15, 'bold'), textvariable=selected_algorithm,
                         values=['Bubble Sort', 'Selection Sort', 'Insertion Sort', 'Quick Sort', 'Merge Sort', 'Heap Sort', 'Shell Sort'])
-
 
 algoMenu.place(x=130, y=0)
 algoMenu.current(0)
@@ -111,5 +106,5 @@ speedMenu.place(x=735, y=0)
 # canvas for visualizing
 canvas = Canvas(root, width=950, height=500, bg='black')
 canvas.place(x=15, y=150)
-print(type(speedMenu.get()))
+
 root.mainloop()
