@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import ttk
 import random
 from bubble_sort import bubble_sort
+from quick_sort import quick_sort
 # create the app frame
 root = Tk()
 root.title('Sorting Visualizer')
@@ -10,7 +11,7 @@ root.geometry('1440x700')
 root.config(bg='gray')
 
 # Function
-# Generate data
+## Generate data
 def Generator():
     global data
     data = [random.randint(minScale.get(), maxScale.get())
@@ -18,7 +19,7 @@ def Generator():
 
     plotData(data, ['red' for x in range(len(data))])
 
-# plot the data
+## plot the data
 def plotData(data, colorArr):
     canvas.delete('all')
     canvas_height = 500
@@ -44,11 +45,16 @@ def plotData(data, colorArr):
         canvas.create_text(x0 + 2, y0, anchor=SW, text=str(data[i]), font=('Arial', 15,'bold'),
                            fill='red')
     root.update_idletasks()
-# sort algorithm
+## sort algorithm
 def StartAlgorithm():
     global data
-    bubble_sort(data, plotData, float(speedMenu.get()))
-# Create algorithm combobox
+    
+    if (algoMenu.get() == 'Quick Sort'):
+        quick_sort(data, 0, len(data)-1, plotData, float(speedMenu.get()))
+        plotData(data, ['green' for x in range(len(data))])
+    elif (algoMenu.get() == 'Bubble Sort'):
+        bubble_sort(data, plotData, float(speedMenu.get()))
+## Create algorithm combobox
 selected_algorithm = StringVar()
 algoLabel = Label(root, text='Algorithm: ', font=(
     'Arial', 15, 'italic'), bg='green', width=10, fg='black', relief=GROOVE, bd=5)
