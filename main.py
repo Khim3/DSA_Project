@@ -16,10 +16,10 @@ def Generator():
     data = [random.randint(minScale.get(), maxScale.get())
             for _ in range(int(dataMenu.get()))]
 
-    plotData(data)
+    plotData(data, ['red' for x in range(len(data))])
 
 # plot the data
-def plotData(data):
+def plotData(data, colorArr):
     canvas.delete('all')
     canvas_height = 500
     canvas_width = 950
@@ -42,15 +42,16 @@ def plotData(data):
         y0 = canvas_height - (height / max(data)) * max_data_height
         x1 = x0 + x_width
         y1 = canvas_height
-        canvas.create_rectangle(x0, y0, x1, y1, fill='blue')
-        canvas.create_text(x0 + 2, y0, anchor=SW, text=str(data[i]), font=('Arial', 15, 'italic'),
+        canvas.create_rectangle(x0, y0, x1, y1, fill=colorArr[i])
+        canvas.create_text(x0 + 2, y0, anchor=SW, text=str(data[i]), font=('Arial', 18, 'bold'),
                            fill='red')
     root.update_idletasks()
 # sort algorithm
 
+
 def StartAlgorithm():
     global data
-    bubble_sort(data, plotData)
+    bubble_sort(data, plotData, float(speedMenu.get()))
 
 
 # Create algorithm combobox
@@ -105,12 +106,12 @@ speedLabel = Label(root, text='Speed: ', font=(
 
 speedLabel.place(x=600, y=00)
 speedMenu = ttk.Combobox(root, height=10, width=15, font=('Arial', 15, 'bold'),
-                         values=['Fast', 'Medium', 'Slow'])
+                         values=[.25, .5, .75])
 speedMenu.current(1)
 speedMenu.place(x=735, y=0)
 
 # canvas for visualizing
 canvas = Canvas(root, width=950, height=500, bg='black')
 canvas.place(x=15, y=150)
-
+print(type(speedMenu.get()))
 root.mainloop()
