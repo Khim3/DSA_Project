@@ -8,15 +8,14 @@ root.geometry('1440x700')
 root.config(bg='gray')
 
 # Function
-
-
+## Generate data
 def Generator():
     data = [random.randint(minScale.get(), maxScale.get())
             for _ in range(int(dataMenu.get()))]
 
     plotData(data)
 
-
+## plot the data
 def plotData(data):
     canvas.delete('all')
     canvas_height = 500
@@ -43,7 +42,9 @@ def plotData(data):
         canvas.create_rectangle(x0, y0, x1, y1, fill='blue')
         canvas.create_text(x0 + 2, y0, anchor=SW, text=str(data[i]), font=('Arial', 15, 'italic'),
                            fill='red')
-
+## sort algorithm
+def StartAlgorithm():
+    print('Sorting algorithm')
 
 # Create algorithm combobox
 selected_algorithm = StringVar()
@@ -89,7 +90,7 @@ maxScale = Scale(root, from_=10, to=100, resolution=5, orient=HORIZONTAL, length
 maxScale.place(x=730, y=50)
 # sort button
 sortButton = Button(root, text='Sort', font=('Arial', 15, 'bold'),
-                    relief=SUNKEN, activebackground='green', activeforeground='white', bd=5, width=13,)
+                    relief=SUNKEN, activebackground='green', activeforeground='white', bd=5, width=13,command = StartAlgorithm)
 sortButton.place(x=1100, y=100)
 # scale combobox
 speedLabel = Label(root, text='Speed: ', font=(
