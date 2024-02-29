@@ -4,12 +4,20 @@ def partition(data, head, tail, plotData, timeTick):
     border = head
     pivot = data[tail]
     
+    plotData(data, colorArray(len(data), head, tail, border, border))
+    time.sleep(timeTick)
     for i in range(head, tail):
         if data[i] < pivot:
+            plotData(data, colorArray(len(data), head, tail, border,i,True))
+            time.sleep(timeTick)
             data[border], data[i] = data[i], data[border]
             border += 1
+        plotData(data, colorArray(len(data), head, tail, border, i))
+        time.sleep(timeTick)
+    ## swapping data
+    plotData(data, colorArray(len(data), head, tail, border,tail, True))
+    time.sleep(timeTick)
     data[border] , data[tail] = data[tail], data[border]
-   
     return border
 def quick_sort(data, head, tail, plotData, timeTick):
     if head < tail:
@@ -19,8 +27,22 @@ def quick_sort(data, head, tail, plotData, timeTick):
         ## right partition
         quick_sort(data, partitionIdx + 1, tail, plotData, timeTick)
  
-   
-data = [1,4,6,1,2,3,9,5,3,7,5,8]
-quick_sort(data, 0, len(data) -1,0,0)
-
-print(data)
+def colorArray(dataLenth, head, tail, border, currentIdx, isSwapping = False):
+    colorArray =[]
+    for i in range(dataLenth):
+        if i >= head and i <= tail:
+            colorArray.append('blue')
+        else:
+            colorArray.append('white')
+        if i == tail:
+            colorArray.append('red')
+        elif i == border:
+            colorArray.append('orange')
+        elif i == currentIdx:
+            colorArray.append('yellow')
+        
+        if isSwapping:
+            if i == border or i == currentIdx:
+                colorArray[i] ='green'
+                
+    return colorArray
