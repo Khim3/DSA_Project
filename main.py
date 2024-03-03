@@ -12,7 +12,9 @@ root.geometry('1440x700')
 root.config(bg='gray')
 
 # Function
-## Generate data
+# Generate data
+
+
 def Generator():
     global data
     data = [random.randint(minScale.get(), maxScale.get())
@@ -20,7 +22,9 @@ def Generator():
 
     plotData(data, ['red' for x in range(len(data))])
 
-## plot the data
+# plot the data
+
+
 def plotData(data, colorArr):
     canvas.delete('all')
     canvas_height = 500
@@ -43,26 +47,30 @@ def plotData(data, colorArr):
         x1 = x0 + x_width
         y1 = canvas_height
         canvas.create_rectangle(x0, y0, x1, y1, fill=colorArr[i])
-        canvas.create_text(x0 + 2, y0, anchor=SW, text=str(data[i]), font=('Arial', 15,'bold'),
-                           fill='red')
+        canvas.create_text(x0 + 2, y0, anchor=SW, text=str(data[i]), font=('Arial', 15, 'bold'),
+                           fill='blue')
     root.update_idletasks()
-## sort algorithm
+# sort algorithm
 def StartAlgorithm():
     global data
-    
+
     if (algoMenu.get() == 'Quick Sort'):
         quick_sort(data, 0, len(data)-1, plotData, float(speedMenu.get()))
-        plotData(data, ['green' for x in range(len(data))])
     elif (algoMenu.get() == 'Bubble Sort'):
         bubble_sort(data, plotData, float(speedMenu.get()))
-## Create algorithm combobox
+    elif (algoMenu.get() == 'Merge Sort'):
+        merge_sort(data, plotData, float(speedMenu.get()))
+    plotData(data, ['green' for x in range(len(data))])
+
+
+# Create algorithm combobox
 selected_algorithm = StringVar()
 algoLabel = Label(root, text='Algorithm: ', font=(
     'Arial', 15, 'italic'), bg='green', width=10, fg='black', relief=GROOVE, bd=5)
 algoLabel.place(x=0, y=0)
 
 algoMenu = ttk.Combobox(root, height=10, width=20, font=('Arial', 15, 'bold'), textvariable=selected_algorithm,
-                        values=['Bubble Sort', 'Selection Sort', 'Insertion Sort', 'Quick Sort', 'Merge Sort', 'Heap Sort', 'Shell Sort'])
+                        values=['Bubble Sort',  'Quick Sort', 'Merge Sort'])
 
 algoMenu.place(x=130, y=0)
 algoMenu.current(0)

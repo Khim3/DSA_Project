@@ -37,9 +37,6 @@ def merge(data, left, middle, right, plotData, timeTick):
     plotData (data, ['green' if x >= left and x<= right else 'white' for x in range(len(data))])
     time.sleep(timeTick)
 
-data = [1, 4, 5, 2, 3, 1, 6, 5, 7, 12, 4, 8]
-merge_sort(data, 0, 0)
-print(data)
 
 def colorArray(length, left, middle, right):
     colorArray = []
@@ -52,5 +49,6 @@ def colorArray(length, left, middle, right):
                 colorArray.append('orange')
         else:
             colorArray.append('blue')
+    return colorArray
             
 
