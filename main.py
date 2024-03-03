@@ -4,6 +4,7 @@ from tkinter import ttk
 import random
 from bubble_sort import bubble_sort
 from quick_sort import quick_sort
+from merge_sort import merge_sort
 # create the app frame
 root = Tk()
 root.title('Sorting Visualizer')
