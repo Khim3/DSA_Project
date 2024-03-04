@@ -4,6 +4,7 @@ from tkinter import ttk
 import random
 from BubbleSort import BubbleSort
 from MergeSort import MergeSort
+from QuickSort import QuickSort
 
 class SortingVisualizer:
     def __init__(self, root):
@@ -111,15 +112,15 @@ class SortingVisualizer:
 
     def start_algorithm(self):
         if (self.algoMenu.get() == 'Quick Sort'):
-            self.quick_sort(self.data, 0, len(self.data)-1, self.plot_data, float(self.speedMenu.get()))
-       
+            quick_sorter = QuickSort(self.plot_data,float(self.speedMenu.get()))
+            quick_sorter.quick_sort(self.data, 0, len(self.data)-1)
         
         elif (self.algoMenu.get() == 'Merge Sort'):
-            merge_sort_instance = MergeSort(self.plot_data, float(self.speedMenu.get()))  
-            merge_sort_instance.merge_sort(self.data)
+            merge_sorter = MergeSort(self.plot_data, float(self.speedMenu.get()))  
+            merge_sorter.merge_sort(self.data)
         elif (self.algoMenu.get() == 'Bubble Sort'):
-            bubble_sort_instance = BubbleSort(self.plot_data, float(self.speedMenu.get()))  
-            bubble_sort_instance.bubble_sort(self.data)
+            bubble_sorter = BubbleSort(self.plot_data, float(self.speedMenu.get()))  
+            bubble_sorter.bubble_sort(self.data)
         self.plot_data(self.data, ['green' for _ in range(len(self.data))])
     
    
