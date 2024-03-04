@@ -1,18 +1,18 @@
 # import the needed libraries
 import time
 
-def merge_sort(data, plotData, timeTick):
-    merge_sort_algo(data, 0, len(data) - 1, plotData, timeTick)
+def merge_sort(data, plot_data, timeTick):
+    merge_sort_algo(data, 0, len(data) - 1, plot_data, timeTick)
 
-def merge_sort_algo(data, left, right, plotData, timeTick):
+def merge_sort_algo(data, left, right, plot_data, timeTick):
     if left < right:
         middle = (left + right) // 2
-        merge_sort_algo(data, left, middle, plotData, timeTick)
-        merge_sort_algo(data, middle + 1, right, plotData, timeTick)
-        merge(data, left, middle, right, plotData, timeTick)
+        merge_sort_algo(data, left, middle, plot_data, timeTick)
+        merge_sort_algo(data, middle + 1, right, plot_data, timeTick)
+        merge(data, left, middle, right, plot_data, timeTick)
 
-def merge(data, left, middle, right, plotData, timeTick):
-    plotData (data, colorArray(len(data), left, middle, right))
+def merge(data, left, middle, right, plot_data, timeTick):
+    plot_data (data, colorArray(len(data), left, middle, right))
     time.sleep(timeTick)
     
     leftPart = data[left:middle + 1]
@@ -34,7 +34,7 @@ def merge(data, left, middle, right, plotData, timeTick):
             data[dataIdx] = rightPart[rightIdx]
             rightIdx += 1
             
-    plotData (data, ['green' if x >= left and x<= right else 'white' for x in range(len(data))])
+    plot_data (data, ['green' if x >= left and x<= right else 'white' for x in range(len(data))])
     time.sleep(timeTick)
 
 

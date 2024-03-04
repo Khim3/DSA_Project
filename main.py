@@ -14,18 +14,17 @@ root.config(bg='gray')
 # Function
 # Generate data
 
-
 def Generator():
     global data
     data = [random.randint(minScale.get(), maxScale.get())
             for _ in range(int(dataMenu.get()))]
 
-    plotData(data, ['red' for x in range(len(data))])
+    plot_data(data, ['red' for x in range(len(data))])
 
 # plot the data
 
 
-def plotData(data, colorArr):
+def plot_data(data, colorArr):
     canvas.delete('all')
     canvas_height = 500
     canvas_width = 950
@@ -51,16 +50,16 @@ def plotData(data, colorArr):
                            fill='blue')
     root.update_idletasks()
 # sort algorithm
-def StartAlgorithm():
+def start_algorithm():
     global data
 
     if (algoMenu.get() == 'Quick Sort'):
-        quick_sort(data, 0, len(data)-1, plotData, float(speedMenu.get()))
+        quick_sort(data, 0, len(data)-1, plot_data, float(speedMenu.get()))
     elif (algoMenu.get() == 'Bubble Sort'):
-        bubble_sort(data, plotData, float(speedMenu.get()))
+        bubble_sort(data, plot_data, float(speedMenu.get()))
     elif (algoMenu.get() == 'Merge Sort'):
-        merge_sort(data, plotData, float(speedMenu.get()))
-    plotData(data, ['green' for x in range(len(data))])
+        merge_sort(data, plot_data, float(speedMenu.get()))
+    plot_data(data, ['green' for x in range(len(data))])
 
 
 # Create algorithm combobox
@@ -106,7 +105,7 @@ maxScale = Scale(root, from_=10, to=100, resolution=5, orient=HORIZONTAL, length
 maxScale.place(x=730, y=50)
 # sort button
 sortButton = Button(root, text='Sort', font=('Arial', 15, 'bold'),
-                    relief=SUNKEN, activebackground='green', activeforeground='white', bd=5, width=13, command=StartAlgorithm)
+                    relief=SUNKEN, activebackground='green', activeforeground='white', bd=5, width=13, command=start_algorithm)
 sortButton.place(x=1100, y=100)
 # scale combobox
 speedLabel = Label(root, text='Speed: ', font=(
