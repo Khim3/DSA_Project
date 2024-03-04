@@ -7,15 +7,29 @@ from MergeSort import MergeSort
 from QuickSort import QuickSort
 
 class SortingVisualizer:
+    _instance = None  # Private class variable to hold the instance
+
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            cls._instance = super().__new__(cls)
+        return cls._instance
     def __init__(self, root):
-        self.root = root
-        self.root.title('Sorting Visualizer')
-        self.root.geometry('1440x700')
-        self.root.config(bg='gray')
+        if not hasattr(self, 'initialized'):  # Ensure initialization only once
+            self.root = root
+            self.root.title('Sorting Visualizer')
+            self.root.geometry('1440x700')
+            self.root.config(bg='gray')
 
-        self.data = []
+            self.data = []
 
-        self.create_widgets()
+            self.create_widgets()
+
+            self.initialized = True
+    @staticmethod
+    def get_instance(root=None):
+        if not SortingVisualizer._instance:
+            SortingVisualizer._instance = SortingVisualizer(root)
+        return SortingVisualizer._instance
 
     def create_widgets(self):
         # Algorithm selection
@@ -128,5 +142,5 @@ class SortingVisualizer:
 
 if __name__ == "__main__":
     root = Tk()
-    app = SortingVisualizer(root)
+    app = SortingVisualizer.get_instance(root)
     root.mainloop()
