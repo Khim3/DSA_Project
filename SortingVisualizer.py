@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import ttk
 import random
 from BubbleSort import BubbleSort
+from MergeSort import MergeSort
 
 class SortingVisualizer:
     def __init__(self, root):
@@ -111,14 +112,13 @@ class SortingVisualizer:
     def start_algorithm(self):
         if (self.algoMenu.get() == 'Quick Sort'):
             self.quick_sort(self.data, 0, len(self.data)-1, self.plot_data, float(self.speedMenu.get()))
-        # elif (self.algoMenu.get() == 'Bubble Sort'):
-        #     self.bubble_sort(self.data, self.plot_data, float(self.speedMenu.get()))
+       
         
         elif (self.algoMenu.get() == 'Merge Sort'):
-            self.merge_sort(self.data, self.plot_data, float(self.speedMenu.get()))
+            merge_sort_instance = MergeSort(self.plot_data, float(self.speedMenu.get()))  
+            merge_sort_instance.merge_sort(self.data)
         elif (self.algoMenu.get() == 'Bubble Sort'):
-            
-            bubble_sort_instance = BubbleSort(self.plot_data, float(self.speedMenu.get()))  # Create an instance of BubbleSort
+            bubble_sort_instance = BubbleSort(self.plot_data, float(self.speedMenu.get()))  
             bubble_sort_instance.bubble_sort(self.data)
         self.plot_data(self.data, ['green' for _ in range(len(self.data))])
     
