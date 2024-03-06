@@ -6,6 +6,8 @@ from BubbleSort import BubbleSort
 from MergeSort import MergeSort
 from QuickSort import QuickSort
 from InsertionSort import InsertionSort
+from SelectionSort import SelectionSort
+
 
 
 class SortingVisualizer:
@@ -43,7 +45,7 @@ class SortingVisualizer:
         self.algoLabel.place(x=0, y=0)
 
         self.algoMenu = ttk.Combobox(self.root, height=10, width=20, font=('Arial', 15, 'bold'), textvariable=self.selected_algorithm,
-                                     values=['Bubble Sort', 'Insertion Sort', 'Quick Sort', 'Merge Sort'])
+                                     values=['Bubble Sort','Selection Sort', 'Insertion Sort', 'Quick Sort', 'Merge Sort'])
         self.algoMenu.place(x=130, y=0)
         self.algoMenu.current(0)
 
@@ -133,6 +135,10 @@ class SortingVisualizer:
             bubble_sorter = BubbleSort(
                 self.plot_data, float(self.speedMenu.get()))
             bubble_sorter.bubble_sort(self.data)
+        elif (self.algoMenu.get() == 'Selection Sort'):
+            selection_sorter = SelectionSort(
+                self.plot_data, float(self.speedMenu.get()))
+            selection_sorter.selection_sort(self.data)
         elif (self.algoMenu.get() == 'Insertion Sort'):
             insertion_sorter = InsertionSort(
                 self.plot_data, float(self.speedMenu.get()))
