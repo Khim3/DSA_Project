@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
+from random import randint
 import random
 from BubbleSort import BubbleSort
 from MergeSort import MergeSort
@@ -22,7 +23,7 @@ class SortingVisualizer:
         if not hasattr(self, 'initialized'):
             self.root = root
             self.root.title('Sorting Visualizer')
-            self.root.geometry('1440x700')
+            self.root.geometry('1400x720')
             self.root.config(bg='gray')
 
             self.data = []
@@ -42,64 +43,75 @@ class SortingVisualizer:
         self.selected_algorithm = StringVar()
         self.algoLabel = Label(self.root, text='Algorithm: ', font=(
             'Arial', 15, 'italic'), bg='green', width=10, fg='black', relief=GROOVE, bd=5)
-        self.algoLabel.place(x=0, y=0)
+        self.algoLabel.place(x=1, y=5)
 
-        self.algoMenu = ttk.Combobox(self.root, height=10, width=20, font=('Arial', 15, 'bold'), textvariable=self.selected_algorithm,
+        self.algoMenu = ttk.Combobox(self.root, height=10, width=15, font=('Arial', 15, 'bold'), textvariable=self.selected_algorithm,
                                      values=['Bubble Sort', 'Selection Sort', 'Insertion Sort', 'Quick Sort', 'Shell Sort', 'Merge Sort'])
-        self.algoMenu.place(x=130, y=0)
-        self.algoMenu.current(0)
+        self.algoMenu.place(x=132, y=8)
+        self.algoMenu.current(randint(0, 5))
 
         # Data generation
         self.random_generate = Button(self.root, text='Generate data', font=('Arial', 15, 'bold'),
                                       relief=SUNKEN, activebackground='green', activeforeground='white', bd=5, width=13, command=self.generator)
-        self.random_generate.place(x=1100, y=50)
+        self.random_generate.place(x=975, y=25)
 
         # Data size selection
-        self.dataLabel = Label(self.root, text='Size : ', font=(
-            'Arial', 15, 'italic'), bg='green', width=15, fg='black', relief=GROOVE, bd=5)
-        self.dataLabel.place(x=0, y=50)
+        self.dataLabel = Label(self.root, text='Size ', font=(
+            'Arial', 15, 'italic'), bg='green', width=10, fg='black', relief=GROOVE, bd=5)
+        self.dataLabel.place(x=2, y=50)
 
-        self.dataMenu = ttk.Combobox(self.root, height=10, width=15, font=('Arial', 15, 'bold'),
+        self.dataMenu = ttk.Combobox(self.root, height=10, width=10, font=('Arial', 15, 'bold'),
                                      values=[10, 15, 20, 25, 30])
-        self.dataMenu.current(0)
+        dataList = [10, 15, 20, 25, 30]
+        random_value = random.choice(dataList)
+        self.dataMenu.current(dataList.index(random_value))
         self.dataMenu.place(x=2, y=85)
 
         # Min value scale
         self.minValueLabel = Label(self.root, text='Min Value', font=(
             'Arial', 15, 'italic'), bg='green', width=10, fg='black', relief=GROOVE, bd=5)
-        self.minValueLabel.place(x=250, y=50)
+        self.minValueLabel.place(x=150, y=50)
 
-        self.minScale = Scale(self.root, from_=1, to=9, orient=HORIZONTAL, length=200,
+        self.minScale = Scale(self.root, from_=1, to=9, orient=HORIZONTAL, length=150,
                               label='Min Value', font=('Arial', 15, 'bold'), bg='green', fg='black')
-        self.minScale.place(x=380, y=50)
+        self.minScale.place(x=280, y=50)
 
         # Max value scale
         self.maxValueLabel = Label(self.root, text='Max Value', font=(
             'Arial', 15, 'italic'), bg='green', width=10, fg='black', relief=GROOVE, bd=5)
-        self.maxValueLabel.place(x=600, y=50)
+        self.maxValueLabel.place(x=470, y=50)
 
-        self.maxScale = Scale(self.root, from_=10, to=100, resolution=5, orient=HORIZONTAL, length=200,
+        self.maxScale = Scale(self.root, from_=10, to=100, resolution=5, orient=HORIZONTAL, length=150,
                               label='Max Value', font=('Arial', 15, 'bold'), bg='green', fg='black')
-        self.maxScale.place(x=730, y=50)
+        self.maxScale.place(x=600, y=50)
 
         # Sort button
         self.sortButton = Button(self.root, text='Sort', font=('Arial', 15, 'bold'),
                                  relief=SUNKEN, activebackground='green', activeforeground='white', bd=5, width=13, command=self.start_algorithm)
-        self.sortButton.place(x=1100, y=100)
+        self.sortButton.place(x=975, y=75)
 
         # Speed selection
         self.speedLabel = Label(self.root, text='Speed: ', font=(
             'Arial', 15, 'italic'), bg='green', width=10, fg='black', relief=GROOVE, bd=5)
-        self.speedLabel.place(x=600, y=0)
+        self.speedLabel.place(x=350, y=5)
 
-        self.speedMenu = ttk.Combobox(self.root, height=10, width=15, font=('Arial', 15, 'bold'),
-                                      values=[.25, .5, .75])
+        self.speedMenu = ttk.Combobox(self.root, height=10, width=10, font=('Arial', 15, 'bold'),
+                                      values=[.25, .5, .75, 1])
         self.speedMenu.current(1)
-        self.speedMenu.place(x=735, y=0)
+        self.speedMenu.place(x=482, y=8)
+
+        # no. of swaps
+        self.swapsLabel = Label(self.root, text='No. of Swaps', font=(
+            'Arial', 15, 'italic'), bg='green', width=12, fg='black', relief=GROOVE, bd=5)
+        self.swapsLabel.place(x=620, y=5)
+        # time
+        self.timeLabel = Label(self.root, text='Time', font=(
+            'Arial', 15, 'italic'), bg='green', width=12, fg='black', relief=GROOVE, bd=5)
+        self.timeLabel.place(x=760, y=50)
 
         # Canvas for visualization
-        self.canvas = Canvas(self.root, width=950, height=500, bg='black')
-        self.canvas.place(x=15, y=150)
+        self.canvas = Canvas(self.root, width=920, height=540, bg='black')
+        self.canvas.place(x=15, y=145)
 
     def generator(self):
         self.data = [random.randint(self.minScale.get(), self.maxScale.get())
@@ -109,8 +121,8 @@ class SortingVisualizer:
 
     def plot_data(self, data, color_arr):
         self.canvas.delete('all')
-        canvas_height = 500
-        canvas_width = 950
+        canvas_height = 540
+        canvas_width = 920
 
         spacing_bet_rect = 10
         total_spacing = (len(data) + 1) * spacing_bet_rect
