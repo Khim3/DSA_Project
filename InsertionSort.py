@@ -1,5 +1,6 @@
 import time
 
+
 class InsertionSort:
     def __init__(self, plot_data, time_tick):
         self.plot_data = plot_data
@@ -12,9 +13,11 @@ class InsertionSort:
             while j >= 0 and key < data[j]:
                 data[j + 1] = data[j]
                 j -= 1
-                self.plot_data(data, ['yellow' if x == j + 1 else 'red' if x == i else 'blue' for x in range(len(data))])
+                self.plot_data(data, [
+                               'yellow' if x == j + 1 else 'red' if x == i else 'blue' for x in range(len(data))])
                 time.sleep(self.time_tick)
             data[j + 1] = key
-            self.plot_data(data, ['green' if x == j + 1 else 'blue' for x in range(len(data))])
+            self.plot_data(data, ['green' if x == j +
+                           1 else 'blue' for x in range(len(data))])
             time.sleep(self.time_tick)
         return data

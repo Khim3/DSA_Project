@@ -1,5 +1,6 @@
 import time
 
+
 class QuickSort:
     def __init__(self, plot_data, time_tick):
         self.plot_data = plot_data
@@ -8,19 +9,23 @@ class QuickSort:
     def partition(self, data, head, tail):
         border = head
         pivot = data[tail]
-        self.plot_data(data, self.color_array(len(data), head, tail, border, border))
+        self.plot_data(data, self.color_array(
+            len(data), head, tail, border, border))
         time.sleep(self.time_tick)
-        
+
         for i in range(head, tail):
             if data[i] < pivot:
-                self.plot_data(data, self.color_array(len(data), head, tail, border, i, True))
+                self.plot_data(data, self.color_array(
+                    len(data), head, tail, border, i, True))
                 time.sleep(self.time_tick)
                 data[border], data[i] = data[i], data[border]
                 border += 1
-            self.plot_data(data, self.color_array(len(data), head, tail, border, i))
+            self.plot_data(data, self.color_array(
+                len(data), head, tail, border, i))
             time.sleep(self.time_tick)
-        
-        self.plot_data(data, self.color_array(len(data), head, tail, border, tail, True))
+
+        self.plot_data(data, self.color_array(
+            len(data), head, tail, border, tail, True))
         time.sleep(self.time_tick)
         data[border], data[tail] = data[tail], data[border]
         return border

@@ -1,5 +1,6 @@
 import time
 
+
 class MergeSort:
     def __init__(self, plot_data, time_tick):
         self.plot_data = plot_data
@@ -43,7 +44,8 @@ class MergeSort:
                 data[data_idx] = right_part[right_idx]
                 right_idx += 1
 
-        self.plot_data(data, ['green' if left <= x <= right else 'white' for x in range(len(data))])
+        self.plot_data(data, ['green' if left <= x <=
+                       right else 'white' for x in range(len(data))])
         time.sleep(self.time_tick)
 
     def color_array(self, length, left, middle, right):

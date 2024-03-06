@@ -7,11 +7,11 @@ from MergeSort import MergeSort
 from QuickSort import QuickSort
 from InsertionSort import InsertionSort
 from SelectionSort import SelectionSort
-
+from ShellSort import ShellSort
 
 
 class SortingVisualizer:
-    _instance = None  
+    _instance = None
 
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
@@ -45,7 +45,7 @@ class SortingVisualizer:
         self.algoLabel.place(x=0, y=0)
 
         self.algoMenu = ttk.Combobox(self.root, height=10, width=20, font=('Arial', 15, 'bold'), textvariable=self.selected_algorithm,
-                                     values=['Bubble Sort','Selection Sort', 'Insertion Sort', 'Quick Sort', 'Merge Sort'])
+                                     values=['Bubble Sort', 'Selection Sort', 'Insertion Sort', 'Quick Sort', 'Shell Sort', 'Merge Sort'])
         self.algoMenu.place(x=130, y=0)
         self.algoMenu.current(0)
 
@@ -147,6 +147,10 @@ class SortingVisualizer:
             merge_sorter = MergeSort(
                 self.plot_data, float(self.speedMenu.get()))
             merge_sorter.merge_sort(self.data)
+        elif (self.algoMenu.get() == 'Shell Sort'):
+            shell_sorter = ShellSort(
+                self.plot_data, float(self.speedMenu.get()))
+            shell_sorter.shell_sort(self.data)
         elif (self.algoMenu.get() == 'Quick Sort'):
             quick_sorter = QuickSort(
                 self.plot_data, float(self.speedMenu.get()))
