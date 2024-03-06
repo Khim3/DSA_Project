@@ -5,16 +5,19 @@ import random
 from BubbleSort import BubbleSort
 from MergeSort import MergeSort
 from QuickSort import QuickSort
+from InsertionSort import InsertionSort
+
 
 class SortingVisualizer:
-    _instance = None  # Private class variable to hold the instance
+    _instance = None  
 
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
             cls._instance = super().__new__(cls)
         return cls._instance
+
     def __init__(self, root):
-        if not hasattr(self, 'initialized'):  # Ensure initialization only once
+        if not hasattr(self, 'initialized'):
             self.root = root
             self.root.title('Sorting Visualizer')
             self.root.geometry('1440x700')
@@ -25,6 +28,7 @@ class SortingVisualizer:
             self.create_widgets()
 
             self.initialized = True
+
     @staticmethod
     def get_instance(root=None):
         if not SortingVisualizer._instance:
@@ -39,13 +43,13 @@ class SortingVisualizer:
         self.algoLabel.place(x=0, y=0)
 
         self.algoMenu = ttk.Combobox(self.root, height=10, width=20, font=('Arial', 15, 'bold'), textvariable=self.selected_algorithm,
-                                    values=['Bubble Sort',  'Quick Sort', 'Merge Sort'])
+                                     values=['Bubble Sort', 'Insertion Sort', 'Quick Sort', 'Merge Sort'])
         self.algoMenu.place(x=130, y=0)
         self.algoMenu.current(0)
 
         # Data generation
         self.random_generate = Button(self.root, text='Generate data', font=('Arial', 15, 'bold'),
-                                     relief=SUNKEN, activebackground='green', activeforeground='white', bd=5, width=13, command=self.generator)
+                                      relief=SUNKEN, activebackground='green', activeforeground='white', bd=5, width=13, command=self.generator)
         self.random_generate.place(x=1100, y=50)
 
         # Data size selection
@@ -54,7 +58,7 @@ class SortingVisualizer:
         self.dataLabel.place(x=0, y=50)
 
         self.dataMenu = ttk.Combobox(self.root, height=10, width=15, font=('Arial', 15, 'bold'),
-                                    values=[10, 15, 20, 25, 30])
+                                     values=[10, 15, 20, 25, 30])
         self.dataMenu.current(0)
         self.dataMenu.place(x=2, y=85)
 
@@ -64,7 +68,7 @@ class SortingVisualizer:
         self.minValueLabel.place(x=250, y=50)
 
         self.minScale = Scale(self.root, from_=1, to=9, orient=HORIZONTAL, length=200,
-                             label='Min Value', font=('Arial', 15, 'bold'), bg='green', fg='black')
+                              label='Min Value', font=('Arial', 15, 'bold'), bg='green', fg='black')
         self.minScale.place(x=380, y=50)
 
         # Max value scale
@@ -73,12 +77,12 @@ class SortingVisualizer:
         self.maxValueLabel.place(x=600, y=50)
 
         self.maxScale = Scale(self.root, from_=10, to=100, resolution=5, orient=HORIZONTAL, length=200,
-                             label='Max Value', font=('Arial', 15, 'bold'), bg='green', fg='black')
+                              label='Max Value', font=('Arial', 15, 'bold'), bg='green', fg='black')
         self.maxScale.place(x=730, y=50)
 
         # Sort button
         self.sortButton = Button(self.root, text='Sort', font=('Arial', 15, 'bold'),
-                                relief=SUNKEN, activebackground='green', activeforeground='white', bd=5, width=13, command=self.start_algorithm)
+                                 relief=SUNKEN, activebackground='green', activeforeground='white', bd=5, width=13, command=self.start_algorithm)
         self.sortButton.place(x=1100, y=100)
 
         # Speed selection
@@ -87,7 +91,7 @@ class SortingVisualizer:
         self.speedLabel.place(x=600, y=0)
 
         self.speedMenu = ttk.Combobox(self.root, height=10, width=15, font=('Arial', 15, 'bold'),
-                                    values=[.25, .5, .75])
+                                      values=[.25, .5, .75])
         self.speedMenu.current(1)
         self.speedMenu.place(x=735, y=0)
 
@@ -125,19 +129,23 @@ class SortingVisualizer:
         self.root.update_idletasks()
 
     def start_algorithm(self):
-        if (self.algoMenu.get() == 'Quick Sort'):
-            quick_sorter = QuickSort(self.plot_data,float(self.speedMenu.get()))
-            quick_sorter.quick_sort(self.data, 0, len(self.data)-1)
-        
-        elif (self.algoMenu.get() == 'Merge Sort'):
-            merge_sorter = MergeSort(self.plot_data, float(self.speedMenu.get()))  
-            merge_sorter.merge_sort(self.data)
-        elif (self.algoMenu.get() == 'Bubble Sort'):
-            bubble_sorter = BubbleSort(self.plot_data, float(self.speedMenu.get()))  
+        if (self.algoMenu.get() == 'Bubble Sort'):
+            bubble_sorter = BubbleSort(
+                self.plot_data, float(self.speedMenu.get()))
             bubble_sorter.bubble_sort(self.data)
+        elif (self.algoMenu.get() == 'Insertion Sort'):
+            insertion_sorter = InsertionSort(
+                self.plot_data, float(self.speedMenu.get()))
+            insertion_sorter.insertion_sort(self.data)
+        elif (self.algoMenu.get() == 'Merge Sort'):
+            merge_sorter = MergeSort(
+                self.plot_data, float(self.speedMenu.get()))
+            merge_sorter.merge_sort(self.data)
+        elif (self.algoMenu.get() == 'Quick Sort'):
+            quick_sorter = QuickSort(
+                self.plot_data, float(self.speedMenu.get()))
+            quick_sorter.quick_sort(self.data, 0, len(self.data)-1)
         self.plot_data(self.data, ['green' for _ in range(len(self.data))])
-    
-   
 
 
 if __name__ == "__main__":
