@@ -21,5 +21,4 @@ class BubbleSort:
                     self.num_of_swap.set(str(self.swap_count))
                     time.sleep(self.time_tick)
         self.plot_data(data, ['blue' for x in range(len(data))])
-        #update swap label
-        #self.num_of_swap.set(str(self.swap_count))
+      

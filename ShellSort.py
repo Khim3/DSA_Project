@@ -1,10 +1,10 @@
 import time
 
-
 class ShellSort:
-    def __init__(self, plot_data, time_tick):
+    def __init__(self, plot_data, time_tick, num_of_swaps):
         self.plot_data = plot_data
         self.time_tick = time_tick
+        self.num_of_swaps = num_of_swaps
 
     def shell_sort(self, data):
         n = len(data)
@@ -16,10 +16,13 @@ class ShellSort:
                 while (j >= gap and data[j - gap] > temp):
                     data[j] = data[j-gap]
                     j -= gap
-                data[j] = temp
+                if j != i:
+                    data[j] = temp
+                    self.num_of_swaps.set(str(int(self.num_of_swaps.get()) + 1))
                 self.plot_data(data, [
                                'yellow' if x == j else 'red' if x == i else 'blue' for x in range(len(data))])
                 time.sleep(self.time_tick)
+                
             gap //= 2
         self.plot_data(data, ['green' for _ in range(len(data))])
         return data

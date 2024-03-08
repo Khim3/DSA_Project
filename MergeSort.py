@@ -1,10 +1,10 @@
 import time
 
-
 class MergeSort:
-    def __init__(self, plot_data, time_tick):
+    def __init__(self, plot_data, time_tick,num_of_steps):
         self.plot_data = plot_data
         self.time_tick = time_tick
+        self.num_of_steps = num_of_steps
 
     def sort(self, data):
         self.merge_sort(data, 0, len(data) - 1)

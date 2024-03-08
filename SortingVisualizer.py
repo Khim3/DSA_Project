@@ -45,8 +45,8 @@ class SortingVisualizer:
         self.algoMenu = ttk.Combobox(self.root, height=10, width=15, font=('Arial', 15, 'bold'), textvariable=self.selected_algorithm,
                                      values=['Bubble Sort', 'Selection Sort', 'Insertion Sort', 'Quick Sort', 'Shell Sort', 'Merge Sort'])
         self.algoMenu.place(x=132, y=8)
-        self.algoMenu.current(0)
-       # self.algoMenu.current(randint(0, 5))
+       # self.algoMenu.current(0)
+        self.algoMenu.current(randint(0, 5))
 
         # Data generation
         self.random_generate = Button(self.root, text='Generate data', font=('Arial', 15, 'bold'),
@@ -104,9 +104,9 @@ class SortingVisualizer:
         self.swapsLabel.place(x=620, y=5)
         self.numOfSwap = StringVar()
         self.numOfSwap.set('0')
-        self.text = Label(self.root, textvariable=self.numOfSwap, font=(
+        self.text = Label(self.root, bg='gray', textvariable=self.numOfSwap, font=(
             'Arial', 15, 'bold'))
-        self.text.place(x=800, y=5)
+        self.text.place(x=780, y=8)
 
         # time
         self.timeLabel = Label(self.root, text='Time', font=(
@@ -122,7 +122,11 @@ class SortingVisualizer:
                      for _ in range(int(self.dataMenu.get()))]
 
         self.plot_data(self.data, ['red' for _ in range(len(self.data))])
-        self.numOfSwap.set('0')
+        if (self.algoMenu.get() == 'Merge Sort'):
+            self.numOfSwap.set('NA')
+        else:   
+            self.numOfSwap.set('0')
+
     def plot_data(self, data, color_arr):
         self.canvas.delete('all')
         canvas_height = 540
@@ -149,27 +153,27 @@ class SortingVisualizer:
     def start_algorithm(self):
         if (self.algoMenu.get() == 'Bubble Sort'):
             bubble_sorter = BubbleSort(
-                self.plot_data, float(self.speedMenu.get()),self.numOfSwap)
+                self.plot_data, float(self.speedMenu.get()), self.numOfSwap)
             bubble_sorter.bubble_sort(self.data)
         elif (self.algoMenu.get() == 'Selection Sort'):
             selection_sorter = SelectionSort(
-                self.plot_data, float(self.speedMenu.get()),self.numOfSwap)
+                self.plot_data, float(self.speedMenu.get()), self.numOfSwap)
             selection_sorter.selection_sort(self.data)
         elif (self.algoMenu.get() == 'Insertion Sort'):
             insertion_sorter = InsertionSort(
-                self.plot_data, float(self.speedMenu.get()),self.numOfSwap)
+                self.plot_data, float(self.speedMenu.get()), self.numOfSwap)
             insertion_sorter.insertion_sort(self.data)
         elif (self.algoMenu.get() == 'Merge Sort'):
             merge_sorter = MergeSort(
-                self.plot_data, float(self.speedMenu.get()),self.numOfSwap)
+                self.plot_data, float(self.speedMenu.get()), self.numOfSwap)
             merge_sorter.merge_sort(self.data)
         elif (self.algoMenu.get() == 'Shell Sort'):
             shell_sorter = ShellSort(
-                self.plot_data, float(self.speedMenu.get()),self.numOfSwap)
+                self.plot_data, float(self.speedMenu.get()), self.numOfSwap)
             shell_sorter.shell_sort(self.data)
         elif (self.algoMenu.get() == 'Quick Sort'):
             quick_sorter = QuickSort(
-                self.plot_data, float(self.speedMenu.get()),self.numOfSwap)
+                self.plot_data, float(self.speedMenu.get()), self.numOfSwap)
             quick_sorter.quick_sort(self.data, 0, len(self.data)-1)
         self.plot_data(self.data, ['green' for _ in range(len(self.data))])
 
