@@ -1,6 +1,5 @@
 import time
 
-
 class SelectionSort:
     def __init__(self, plot_data, time_tick, num_of_swap):
         self.plot_data = plot_data
@@ -14,11 +13,12 @@ class SelectionSort:
             for j in range(i+1, len(data)):
                 if data[j] < data[min_idx]:
                     min_idx = j
-            data[i], data[min_idx] = data[min_idx], data[i]
-            swap_count += 1
+            if i != min_idx:
+                data[i], data[min_idx] = data[min_idx], data[i]
+                swap_count += 1
+                self.num_of_swap.set(str(swap_count))
             self.plot_data(
                 data, ['yellow' if x == min_idx or x == i else 'red' for x in range(len(data))])
-            self.num_of_swap.set(str(swap_count))
             time.sleep(self.time_tick)
         self.plot_data(data, ['green' for _ in range(len(data))])
         return data
