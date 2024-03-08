@@ -122,7 +122,7 @@ class SortingVisualizer:
                      for _ in range(int(self.dataMenu.get()))]
 
         self.plot_data(self.data, ['red' for _ in range(len(self.data))])
-
+        self.numOfSwap.set('0')
     def plot_data(self, data, color_arr):
         self.canvas.delete('all')
         canvas_height = 540
@@ -149,27 +149,27 @@ class SortingVisualizer:
     def start_algorithm(self):
         if (self.algoMenu.get() == 'Bubble Sort'):
             bubble_sorter = BubbleSort(
-                self.plot_data, float(self.speedMenu.get()),  self.numOfSwap)
+                self.plot_data, float(self.speedMenu.get()),self.numOfSwap)
             bubble_sorter.bubble_sort(self.data)
         elif (self.algoMenu.get() == 'Selection Sort'):
             selection_sorter = SelectionSort(
-                self.plot_data, float(self.speedMenu.get()))
+                self.plot_data, float(self.speedMenu.get()),self.numOfSwap)
             selection_sorter.selection_sort(self.data)
         elif (self.algoMenu.get() == 'Insertion Sort'):
             insertion_sorter = InsertionSort(
-                self.plot_data, float(self.speedMenu.get()))
+                self.plot_data, float(self.speedMenu.get()),self.numOfSwap)
             insertion_sorter.insertion_sort(self.data)
         elif (self.algoMenu.get() == 'Merge Sort'):
             merge_sorter = MergeSort(
-                self.plot_data, float(self.speedMenu.get()))
+                self.plot_data, float(self.speedMenu.get()),self.numOfSwap)
             merge_sorter.merge_sort(self.data)
         elif (self.algoMenu.get() == 'Shell Sort'):
             shell_sorter = ShellSort(
-                self.plot_data, float(self.speedMenu.get()))
+                self.plot_data, float(self.speedMenu.get()),self.numOfSwap)
             shell_sorter.shell_sort(self.data)
         elif (self.algoMenu.get() == 'Quick Sort'):
             quick_sorter = QuickSort(
-                self.plot_data, float(self.speedMenu.get()))
+                self.plot_data, float(self.speedMenu.get()),self.numOfSwap)
             quick_sorter.quick_sort(self.data, 0, len(self.data)-1)
         self.plot_data(self.data, ['green' for _ in range(len(self.data))])
 
