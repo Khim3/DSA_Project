@@ -25,11 +25,8 @@ class SortingVisualizer:
             self.root.title('Sorting Visualizer')
             self.root.geometry('1400x720')
             self.root.config(bg='gray')
-
             self.data = []
-
             self.create_widgets()
-
             self.initialized = True
 
     @staticmethod
@@ -48,7 +45,8 @@ class SortingVisualizer:
         self.algoMenu = ttk.Combobox(self.root, height=10, width=15, font=('Arial', 15, 'bold'), textvariable=self.selected_algorithm,
                                      values=['Bubble Sort', 'Selection Sort', 'Insertion Sort', 'Quick Sort', 'Shell Sort', 'Merge Sort'])
         self.algoMenu.place(x=132, y=8)
-        self.algoMenu.current(randint(0, 5))
+        self.algoMenu.current(0)
+       # self.algoMenu.current(randint(0, 5))
 
         # Data generation
         self.random_generate = Button(self.root, text='Generate data', font=('Arial', 15, 'bold'),
@@ -101,9 +99,15 @@ class SortingVisualizer:
         self.speedMenu.place(x=482, y=8)
 
         # no. of swaps
-        self.swapsLabel = Label(self.root, text='No. of Swaps', font=(
+        self.swapsLabel = Label(self.root, text='No. of Swaps: ', font=(
             'Arial', 15, 'italic'), bg='green', width=12, fg='black', relief=GROOVE, bd=5)
         self.swapsLabel.place(x=620, y=5)
+        self.numOfSwap = StringVar()
+        self.numOfSwap.set('0')
+        self.text = Label(self.root, textvariable=self.numOfSwap, font=(
+            'Arial', 15, 'bold'))
+        self.text.place(x=800, y=5)
+
         # time
         self.timeLabel = Label(self.root, text='Time', font=(
             'Arial', 15, 'italic'), bg='green', width=12, fg='black', relief=GROOVE, bd=5)
@@ -145,7 +149,7 @@ class SortingVisualizer:
     def start_algorithm(self):
         if (self.algoMenu.get() == 'Bubble Sort'):
             bubble_sorter = BubbleSort(
-                self.plot_data, float(self.speedMenu.get()))
+                self.plot_data, float(self.speedMenu.get()),  self.numOfSwap)
             bubble_sorter.bubble_sort(self.data)
         elif (self.algoMenu.get() == 'Selection Sort'):
             selection_sorter = SelectionSort(
