@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import ttk
 from random import randint
 import random
+import time
 from BubbleSort import BubbleSort
 from MergeSort import MergeSort
 from QuickSort import QuickSort
@@ -112,6 +113,11 @@ class SortingVisualizer:
         self.timeLabel = Label(self.root, text='Time', font=(
             'Arial', 15, 'italic'), bg='green', width=12, fg='black', relief=GROOVE, bd=5)
         self.timeLabel.place(x=760, y=50)
+        self.time = StringVar()
+        self.time.set('0')
+        self.timeDisplay = Label(self.root, bg='gray', textvariable=self.time, font=(
+            'Arial', 15, 'bold'))
+        self.timeDisplay.place(x=780, y=90)
 
         # Canvas for visualization
         self.canvas = Canvas(self.root, width=920, height=540, bg='black')
@@ -124,7 +130,7 @@ class SortingVisualizer:
         self.plot_data(self.data, ['red' for _ in range(len(self.data))])
         if (self.algoMenu.get() == 'Merge Sort'):
             self.numOfSwap.set('NA')
-        else:   
+        else:
             self.numOfSwap.set('0')
 
     def plot_data(self, data, color_arr):
@@ -151,6 +157,8 @@ class SortingVisualizer:
         self.root.update_idletasks()
 
     def start_algorithm(self):
+        global start_time
+        start_time = time.time()
         if (self.algoMenu.get() == 'Bubble Sort'):
             bubble_sorter = BubbleSort(
                 self.plot_data, float(self.speedMenu.get()), self.numOfSwap)
@@ -176,7 +184,11 @@ class SortingVisualizer:
                 self.plot_data, float(self.speedMenu.get()), self.numOfSwap)
             quick_sorter.quick_sort(self.data, 0, len(self.data)-1)
         self.plot_data(self.data, ['green' for _ in range(len(self.data))])
-
+        self.end_time = time.time() 
+        global end_time
+        end_time = time.time()
+        total_time = end_time - start_time
+        self.time.set(f"{total_time:.2f} seconds")
 
 if __name__ == "__main__":
     root = Tk()
