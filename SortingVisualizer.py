@@ -40,26 +40,26 @@ class SortingVisualizer:
         # Algorithm selection
         self.selected_algorithm = StringVar()
         self.algoLabel = Label(self.root, text='Algorithm: ', font=(
-            'Arial', 15, 'italic'), bg='green', width=10, fg='black', relief=GROOVE, bd=5)
+            'Segoe UI', 15, 'italic'), bg='green', width=10, fg='black', relief=GROOVE, bd=5)
         self.algoLabel.place(x=1, y=5)
 
-        self.algoMenu = ttk.Combobox(self.root, height=10, width=15, font=('Arial', 15, 'bold'), textvariable=self.selected_algorithm,
-                                     values=['Bubble Sort', 'Selection Sort', 'Insertion Sort', 'Quick Sort', 'Shell Sort', 'Merge Sort'])
+        self.algoMenu = ttk.Combobox(self.root, height=10, width=15, font=('Segoe UI', 15, 'bold'), textvariable=self.selected_algorithm,
+                                     values=['Select one', 'Bubble Sort', 'Selection Sort', 'Insertion Sort', 'Quick Sort', 'Shell Sort', 'Merge Sort'])
         self.algoMenu.place(x=132, y=8)
-       # self.algoMenu.current(0)
-        self.algoMenu.current(randint(0, 5))
+        self.algoMenu.current(0)
+       # self.algoMenu.current(randint(0, 5))
 
         # Data generation
-        self.random_generate = Button(self.root, text='Generate data', font=('Arial', 15, 'bold'),
+        self.random_generate = Button(self.root, text='Generate data', font=('Segoe UI', 15, 'bold'),
                                       relief=SUNKEN, activebackground='green', activeforeground='white', bd=5, width=13, command=self.generator)
         self.random_generate.place(x=975, y=25)
 
         # Data size selection
         self.dataLabel = Label(self.root, text='Size ', font=(
-            'Arial', 15, 'italic'), bg='green', width=10, fg='black', relief=GROOVE, bd=5)
+            'Segoe UI', 15, 'italic'), bg='green', width=10, fg='black', relief=GROOVE, bd=5)
         self.dataLabel.place(x=2, y=50)
 
-        self.dataMenu = ttk.Combobox(self.root, height=10, width=10, font=('Arial', 15, 'bold'),
+        self.dataMenu = ttk.Combobox(self.root, height=10, width=10, font=('Segoe UI', 15, 'bold'),
                                      values=[10, 15, 20, 25, 30])
         dataList = [10, 15, 20, 25, 30]
         random_value = random.choice(dataList)
@@ -68,71 +68,94 @@ class SortingVisualizer:
 
         # Min value scale
         self.minValueLabel = Label(self.root, text='Min Value', font=(
-            'Arial', 15, 'italic'), bg='green', width=10, fg='black', relief=GROOVE, bd=5)
+            'Segoe UI', 15, 'italic'), bg='green', width=10, fg='black', relief=GROOVE, bd=5)
         self.minValueLabel.place(x=150, y=50)
 
         self.minScale = Scale(self.root, from_=1, to=9, orient=HORIZONTAL, length=150,
-                              label='Min Value', font=('Arial', 15, 'bold'), bg='green', fg='black')
+                              label='Min Value', font=('Segoe UI', 15, 'bold'), bg='green', fg='black')
         self.minScale.place(x=280, y=50)
 
         # Max value scale
         self.maxValueLabel = Label(self.root, text='Max Value', font=(
-            'Arial', 15, 'italic'), bg='green', width=10, fg='black', relief=GROOVE, bd=5)
+            'Segoe UI', 15, 'italic'), bg='green', width=10, fg='black', relief=GROOVE, bd=5)
         self.maxValueLabel.place(x=470, y=50)
 
         self.maxScale = Scale(self.root, from_=10, to=100, resolution=5, orient=HORIZONTAL, length=150,
-                              label='Max Value', font=('Arial', 15, 'bold'), bg='green', fg='black')
+                              label='Max Value', font=('Segoe UI', 15, 'bold'), bg='green', fg='black')
         self.maxScale.place(x=600, y=50)
 
         # Sort button
-        self.sortButton = Button(self.root, text='Sort', font=('Arial', 15, 'bold'),
+        self.sortButton = Button(self.root, text='Sort', font=('Segoe UI', 15, 'bold'),
                                  relief=SUNKEN, activebackground='green', activeforeground='white', bd=5, width=13, command=self.start_algorithm)
         self.sortButton.place(x=975, y=75)
 
         # Speed selection
         self.speedLabel = Label(self.root, text='Speed: ', font=(
-            'Arial', 15, 'italic'), bg='green', width=10, fg='black', relief=GROOVE, bd=5)
+            'Segoe UI', 15, 'italic'), bg='green', width=10, fg='black', relief=GROOVE, bd=5)
         self.speedLabel.place(x=350, y=5)
 
-        self.speedMenu = ttk.Combobox(self.root, height=10, width=10, font=('Arial', 15, 'bold'),
+        self.speedMenu = ttk.Combobox(self.root, height=10, width=10, font=('Segoe UI', 15, 'bold'),
                                       values=[.25, .5, .75, 1])
-        self.speedMenu.current(1)
+        self.speedMenu.current(0)
         self.speedMenu.place(x=482, y=8)
 
         # no. of swaps
         self.swapsLabel = Label(self.root, text='No. of Swaps: ', font=(
-            'Arial', 15, 'italic'), bg='green', width=12, fg='black', relief=GROOVE, bd=5)
+            'Segoe UI', 15, 'italic'), bg='green', width=12, fg='black', relief=GROOVE, bd=5)
         self.swapsLabel.place(x=620, y=5)
         self.numOfSwap = StringVar()
         self.numOfSwap.set('0')
         self.text = Label(self.root, bg='gray', textvariable=self.numOfSwap, font=(
-            'Arial', 15, 'bold'))
+            'Segoe UI', 15, 'bold'))
         self.text.place(x=780, y=8)
 
         # time
         self.timeLabel = Label(self.root, text='Time', font=(
-            'Arial', 15, 'italic'), bg='green', width=12, fg='black', relief=GROOVE, bd=5)
+            'Segoe UI', 15, 'italic'), bg='green', width=12, fg='black', relief=GROOVE, bd=5)
         self.timeLabel.place(x=760, y=50)
         self.time = StringVar()
         self.time.set('0')
         self.timeDisplay = Label(self.root, bg='gray', textvariable=self.time, font=(
-            'Arial', 15, 'bold'))
+            'Segoe UI', 15, 'bold'))
         self.timeDisplay.place(x=780, y=90)
 
         # Canvas for visualization
         self.canvas = Canvas(self.root, width=920, height=540, bg='black')
         self.canvas.place(x=15, y=145)
+        # Canvas for description
+        self.canvas_desc = Canvas(self.root, width=450, height=540, bg='black')
+        self.canvas_desc.place(x=930, y=145)
 
+    
     def generator(self):
         self.data = [random.randint(self.minScale.get(), self.maxScale.get())
                      for _ in range(int(self.dataMenu.get()))]
 
         self.plot_data(self.data, ['red' for _ in range(len(self.data))])
-        if (self.algoMenu.get() == 'Merge Sort'):
+        algorithm = self.algoMenu.get()
+        if algorithm == 'Merge Sort':
             self.numOfSwap.set('NA')
         else:
             self.numOfSwap.set('0')
-
+        self.canvas_desc.delete('all')
+        canvas_height = 540
+        canvas_width = 920
+        description = ''
+        if algorithm == 'Bubble Sort':
+            description = "Batman and Joker are gonna have a tonight at hotel gay sex"        
+        elif algorithm == 'Merge Sort':
+            description = "Description for Merge Sort goes here..."
+        elif algorithm == 'Quick Sort':
+            description = "Description for Quick Sort goes here..."
+        elif algorithm == 'Selection Sort':
+            description = "Description for Selection Sort goes here..."
+        elif algorithm == 'Insertion Sort':
+            description = "Description for Insertion Sort goes here..."
+        elif algorithm == 'Shell Sort':
+            description = "Description for Shell Sort goes here..."
+        elif algorithm == 'Quick Sort':
+            description = "Description for Quick Sort goes here..."
+        self.canvas_desc.create_text(10, 10, anchor=NW, text=description, font=('Segoe UI', 15, 'bold'), fill='white')
     def plot_data(self, data, color_arr):
         self.canvas.delete('all')
         canvas_height = 540
@@ -152,7 +175,7 @@ class SortingVisualizer:
             x1 = x0 + x_width
             y1 = canvas_height
             self.canvas.create_rectangle(x0, y0, x1, y1, fill=color_arr[i])
-            self.canvas.create_text(x0 + 2, y0, anchor=SW, text=str(data[i]), font=('Arial', 15, 'bold'),
+            self.canvas.create_text(x0 + 2, y0, anchor=SW, text=str(data[i]), font=('Segoe UI', 15, 'bold'),
                                     fill='blue')
         self.root.update_idletasks()
 
@@ -184,11 +207,12 @@ class SortingVisualizer:
                 self.plot_data, float(self.speedMenu.get()), self.numOfSwap)
             quick_sorter.quick_sort(self.data, 0, len(self.data)-1)
         self.plot_data(self.data, ['green' for _ in range(len(self.data))])
-        self.end_time = time.time() 
+        self.end_time = time.time()
         global end_time
         end_time = time.time()
         total_time = end_time - start_time
         self.time.set(f"{total_time:.2f} seconds")
+
 
 if __name__ == "__main__":
     root = Tk()
