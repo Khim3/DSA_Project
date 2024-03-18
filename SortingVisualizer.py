@@ -10,6 +10,7 @@ from QuickSort import QuickSort
 from InsertionSort import InsertionSort
 from SelectionSort import SelectionSort
 from ShellSort import ShellSort
+from tkinter import WORD
 
 
 class SortingVisualizer:
@@ -21,14 +22,12 @@ class SortingVisualizer:
         return cls._instance
 
     def __init__(self, root):
-        if not hasattr(self, 'initialized'):
-            self.root = root
-            self.root.title('Sorting Visualizer')
-            self.root.geometry('1400x720')
-            self.root.config(bg='gray')
-            self.data = []
-            self.create_widgets()
-            self.initialized = True
+        self.root = root
+        self.root.title('Sorting Visualizer')
+        self.root.geometry('1400x720')
+        self.root.config(bg='gray')
+        self.data = []
+        self.create_widgets()
 
     @staticmethod
     def get_instance(root=None):
@@ -108,7 +107,6 @@ class SortingVisualizer:
         self.text = Label(self.root, bg='gray', textvariable=self.numOfSwap, font=(
             'Segoe UI', 15, 'bold'))
         self.text.place(x=780, y=8)
-
         # time
         self.timeLabel = Label(self.root, text='Time', font=(
             'Segoe UI', 15, 'italic'), bg='green', width=12, fg='black', relief=GROOVE, bd=5)
@@ -126,7 +124,6 @@ class SortingVisualizer:
         self.canvas_desc = Canvas(self.root, width=450, height=540, bg='black')
         self.canvas_desc.place(x=930, y=145)
 
-    
     def generator(self):
         self.data = [random.randint(self.minScale.get(), self.maxScale.get())
                      for _ in range(int(self.dataMenu.get()))]
@@ -138,11 +135,9 @@ class SortingVisualizer:
         else:
             self.numOfSwap.set('0')
         self.canvas_desc.delete('all')
-        canvas_height = 540
-        canvas_width = 920
         description = ''
         if algorithm == 'Bubble Sort':
-            description = "Batman and Joker are gonna have a tonight at hotel gay sex"        
+            description = "Description for Bubble Sort goes here..."
         elif algorithm == 'Merge Sort':
             description = "Description for Merge Sort goes here..."
         elif algorithm == 'Quick Sort':
@@ -155,7 +150,9 @@ class SortingVisualizer:
             description = "Description for Shell Sort goes here..."
         elif algorithm == 'Quick Sort':
             description = "Description for Quick Sort goes here..."
-        self.canvas_desc.create_text(10, 10, anchor=NW, text=description, font=('Segoe UI', 15, 'bold'), fill='white')
+        self.canvas_desc.create_text(10, 10, anchor=NW, text=description, font=(
+            'Segoe UI', 14, 'bold'), fill='orange')
+
     def plot_data(self, data, color_arr):
         self.canvas.delete('all')
         canvas_height = 540
