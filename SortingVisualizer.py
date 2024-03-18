@@ -10,7 +10,7 @@ from QuickSort import QuickSort
 from InsertionSort import InsertionSort
 from SelectionSort import SelectionSort
 from ShellSort import ShellSort
-from tkinter import WORD
+import textwrap
 
 
 class SortingVisualizer:
@@ -44,7 +44,7 @@ class SortingVisualizer:
 
         self.algoMenu = ttk.Combobox(self.root, height=10, width=15, font=('Segoe UI', 15, 'bold'), textvariable=self.selected_algorithm,
                                      values=['Select one', 'Bubble Sort', 'Selection Sort', 'Insertion Sort', 'Quick Sort', 'Shell Sort', 'Merge Sort'])
-        self.algoMenu.place(x=132, y=8)
+        self.algoMenu.place(x=125, y=8)
         self.algoMenu.current(0)
        # self.algoMenu.current(randint(0, 5))
 
@@ -58,12 +58,12 @@ class SortingVisualizer:
             'Segoe UI', 15, 'italic'), bg='green', width=10, fg='black', relief=GROOVE, bd=5)
         self.dataLabel.place(x=2, y=50)
 
-        self.dataMenu = ttk.Combobox(self.root, height=10, width=10, font=('Segoe UI', 15, 'bold'),
+        self.dataMenu = ttk.Combobox(self.root, height=10, width=8, font=('Segoe UI', 15, 'bold'),
                                      values=[10, 15, 20, 25, 30])
         dataList = [10, 15, 20, 25, 30]
         random_value = random.choice(dataList)
         self.dataMenu.current(dataList.index(random_value))
-        self.dataMenu.place(x=2, y=85)
+        self.dataMenu.place(x=2, y=90)
 
         # Min value scale
         self.minValueLabel = Label(self.root, text='Min Value', font=(
@@ -72,16 +72,16 @@ class SortingVisualizer:
 
         self.minScale = Scale(self.root, from_=1, to=9, orient=HORIZONTAL, length=150,
                               label='Min Value', font=('Segoe UI', 15, 'bold'), bg='green', fg='black')
-        self.minScale.place(x=280, y=50)
+        self.minScale.place(x=274, y=50)
 
         # Max value scale
         self.maxValueLabel = Label(self.root, text='Max Value', font=(
             'Segoe UI', 15, 'italic'), bg='green', width=10, fg='black', relief=GROOVE, bd=5)
         self.maxValueLabel.place(x=470, y=50)
 
-        self.maxScale = Scale(self.root, from_=10, to=100, resolution=5, orient=HORIZONTAL, length=150,
+        self.maxScale = Scale(self.root, from_=10, to=100, resolution=10, orient=HORIZONTAL, length=150,
                               label='Max Value', font=('Segoe UI', 15, 'bold'), bg='green', fg='black')
-        self.maxScale.place(x=600, y=50)
+        self.maxScale.place(x=595, y=50)
 
         # Sort button
         self.sortButton = Button(self.root, text='Sort', font=('Segoe UI', 15, 'bold'),
@@ -94,9 +94,9 @@ class SortingVisualizer:
         self.speedLabel.place(x=350, y=5)
 
         self.speedMenu = ttk.Combobox(self.root, height=10, width=10, font=('Segoe UI', 15, 'bold'),
-                                      values=[.25, .5, .75, 1])
+                                      values=[.1, .25, .5, .75, 1])
         self.speedMenu.current(0)
-        self.speedMenu.place(x=482, y=8)
+        self.speedMenu.place(x=475, y=8)
 
         # no. of swaps
         self.swapsLabel = Label(self.root, text='No. of Swaps: ', font=(
@@ -115,7 +115,7 @@ class SortingVisualizer:
         self.time.set('0')
         self.timeDisplay = Label(self.root, bg='gray', textvariable=self.time, font=(
             'Segoe UI', 15, 'bold'))
-        self.timeDisplay.place(x=780, y=90)
+        self.timeDisplay.place(x=770, y=90)
 
         # Canvas for visualization
         self.canvas = Canvas(self.root, width=920, height=540, bg='black')
@@ -137,20 +137,23 @@ class SortingVisualizer:
         self.canvas_desc.delete('all')
         description = ''
         if algorithm == 'Bubble Sort':
-            description = "Description for Bubble Sort goes here..."
+            description = "Bubble Sort is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order. The pass through the list is repeated until the list is sorted."
         elif algorithm == 'Merge Sort':
-            description = "Description for Merge Sort goes here..."
+            description = "Merge Sort is a divide-and-conquer algorithm that splits an array into two halves, recursively sorts them, and then merges them. This method results in a stable, efficient sort"
         elif algorithm == 'Quick Sort':
-            description = "Description for Quick Sort goes here..."
+            description = "Quick Sort is an efficient sorting algorithm that uses divide-and-conquer principles. It partitions an array and recursively sorts the sub-arrays, achieving high performance"
         elif algorithm == 'Selection Sort':
-            description = "Description for Selection Sort goes here..."
+            description = "This is a simple comparison-based algorithm. It divides the input into a sorted and an unsorted region, and repeatedly picks the smallest element from the unsorted region and moves it to the sorted region."
         elif algorithm == 'Insertion Sort':
-            description = "Description for Insertion Sort goes here..."
+            description = "Insertion Sort is a simple, comparison-based algorithm. It builds a sorted array one item at a time, making it efficient for small data sets and substantially sorted lists."
         elif algorithm == 'Shell Sort':
-            description = "Description for Shell Sort goes here..."
+            description = "This is a generalized version of insertion sort. It sorts elements at specific intervals, and gradually reduces the interval to perform a final insertion sort. It’s more efficient than simple insertion sort."
         elif algorithm == 'Quick Sort':
-            description = "Description for Quick Sort goes here..."
-        self.canvas_desc.create_text(10, 10, anchor=NW, text=description, font=(
+            description = "This is a highly efficient sorting algorithm that employs divide-and-conquer principles. It selects a ‘pivot’ element from the array and partitions the other elements into two sub-arrays, according to whether they are less than or greater than the pivot. The sub-arrays are then recursively sorted."
+        # wrap the description
+        wrapper = textwrap.TextWrapper(width=50)
+        wrapped_description = wrapper.fill(description)
+        self.canvas_desc.create_text(10, 10, anchor=NW, text=wrapped_description, font=(
             'Segoe UI', 14, 'bold'), fill='orange')
 
     def plot_data(self, data, color_arr):
